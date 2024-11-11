@@ -13,10 +13,10 @@ export default function Home() {
   // Handle adding or updating a place in the todos list
   const addPlace = () => {
     if (inputVal && id) {
-      let obj = todos.find(item => item.id === id);
+      const obj = todos.find(item => item.id === id); // Use const instead of let
       if (obj) {
         // If the ID exists, update the place
-        setTodos(todos.map(item => 
+        setTodos(todos.map(item =>
           item.id === id ? { ...item, place: inputVal } : item
         ));
       } else {
@@ -31,14 +31,18 @@ export default function Home() {
   };
 
   // Handle editing an existing item
-  const editItem = (id) => {
-    let obj = todos.find((item) => item.id === id);
-    setInput(obj.place);
-    setId(obj.id);
+  const editItem = (id: number) => {
+    const obj = todos.find((item) => item.id === id); // Use const instead of let
+    if (obj) {
+      setInput(obj.place);
+      setId(obj.id);
+    } else {
+      alert("Place not found!");
+    }
   };
 
   // Handle deleting an item from the list
-  const deleteItem = (id) => {
+  const deleteItem = (id: number) => {
     setTodos(todos.filter((item) => item.id !== id));
   };
 
